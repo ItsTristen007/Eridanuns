@@ -8,6 +8,7 @@ public class Alien : MonoBehaviour
     private float x;
     private float y;
     private Rigidbody2D rb;
+    public AudioClip deadSound;
     
 
     public Sprite mn, md, mg;
@@ -44,14 +45,18 @@ public class Alien : MonoBehaviour
     private void Update()
     {
         if(x > 6 || x < -6 || y > 6) Destroy(gameObject);
+
+       
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
+            AudioSource.PlayClipAtPoint(deadSound, Vector3.zero);
             Destroy(other.gameObject);
             Destroy(gameObject);
+            
         }
     }
 

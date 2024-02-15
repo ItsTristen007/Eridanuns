@@ -12,13 +12,18 @@ public class Player : MonoBehaviour
     private int adjustX = 0;
     private int adjustY = 0;
     private int fireRate = 0;
+    public AudioClip laserSound;
+    public AudioClip backgroundMusic; 
     
+
     [SerializeField] GameObject bullet;
     
     // Start is called before the first frame update
     void Start()
     {
-
+        AudioSource.PlayClipAtPoint(backgroundMusic, Vector3.zero,0.5f);
+        
+        
     }
 
     // Update is called once per frame
@@ -69,6 +74,7 @@ public class Player : MonoBehaviour
         bul.SetX(x);
         bul.SetY(y);
         bul.Activate();
+        AudioSource.PlayClipAtPoint(laserSound, Vector3.zero);
     }
 
     private void FixedUpdate()
