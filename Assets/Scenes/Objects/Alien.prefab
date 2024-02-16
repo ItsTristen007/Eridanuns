@@ -47,7 +47,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f3ab8e5f9a721b42ab9d52155b5846b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   deadSound: {fileID: 8300000, guid: af66162561d2eed40ad49268cab318bb, type: 3}
+=======
+  bullet: {fileID: 7153555213712993457, guid: 36bd50f9543bd5149a7671200b4564d9, type: 3}
+>>>>>>> Stashed changes
   mn: {fileID: 21300000, guid: e556d63148a4d2847bbe7d8c47b23c0c, type: 3}
   md: {fileID: 21300000, guid: e556d63148a4d2847bbe7d8c47b23c0c, type: 3}
   mg: {fileID: 21300000, guid: e556d63148a4d2847bbe7d8c47b23c0c, type: 3}

@@ -2,14 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Alien : MonoBehaviour
 {
     private float x;
     private float y;
+    private float mX;
+    private float mY;
     private Rigidbody2D rb;
     public AudioClip deadSound;
     
+    [SerializeField] GameObject bullet;
+    private int shootTimer = 0;
 
     public Sprite mn, md, mg;
     
@@ -37,9 +42,16 @@ public class Alien : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        y -= 0.04f;
-        x += 0.048f;
+        y -= mY;
+        x += mX;
         SetCoords();
+
+        shootTimer++;
+        if (shootTimer > 50 && Random.Range(1, 3) == 1)
+        {
+            Create("blaster", x, y -.8f);
+            shootTimer = 0;
+        }
     }
 
     private void Update()
@@ -58,6 +70,16 @@ public class Alien : MonoBehaviour
             Destroy(gameObject);
             
         }
+    }
+    
+    public void Create(string name, float x, float y)
+    {
+        GameObject obj = Instantiate(bullet, new Vector3(0, 0, -1), Quaternion.identity);
+        BulletBase bul = obj.GetComponent<BulletBase>();
+        bul.name = name;
+        bul.SetX(x);
+        bul.SetY(y);
+        bul.Activate();
     }
 
     public void SetX(int x)
@@ -78,5 +100,25 @@ public class Alien : MonoBehaviour
     public float GetY()
     {
         return y;
+    }
+    
+    public void SetmX(float mX)
+    {
+        this.mX = mX;
+    }
+
+    public float GetmX()
+    {
+        return mX;
+    }
+
+    public void SetmY(float mY)
+    {
+        this.mY = mY;
+    }
+
+    public float GetmY()
+    {
+        return mY;
     }
 }
