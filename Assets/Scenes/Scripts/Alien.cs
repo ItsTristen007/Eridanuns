@@ -10,6 +10,13 @@ public class Alien : MonoBehaviour
     private Rigidbody2D rb;
     public AudioClip deadSound;
     
+    [SerializeField] GameObject bullet;
+    private int shootTimer = 0;
+
+    private int health = 200;
+
+    private float mX;
+    private float mY;
 
     public Sprite mn, md, mg;
     
@@ -33,30 +40,50 @@ public class Alien : MonoBehaviour
     {
         this.transform.position = new Vector3(x, y, -1.0f);
     }
+    
+    public void Create(string name, float x, float y)
+    {
+        GameObject obj = Instantiate(bullet, new Vector3(0, 0, -1), Quaternion.identity);
+        BulletBase bul = obj.GetComponent<BulletBase>();
+        bul.name = name;
+        bul.SetX(x);
+        bul.SetY(y);
+        bul.Activate();
+    }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        y -= 0.04f;
-        x += 0.048f;
+        y -= mX;
+        x += mY;
         SetCoords();
+
+        shootTimer++;
+        if (shootTimer > 50)
+        {
+            Create("blaster", x, y-.8f);
+            shootTimer = 0;
+        }
     }
 
     private void Update()
     {
-        if(x > 6 || x < -6 || y > 6) Destroy(gameObject);
+        if(x > 6 || x < -6 || y > 7 || y < -7) Destroy(gameObject);
 
-       
+        if (health <= 0)
+        {
+            AudioSource.PlayClipAtPoint(deadSound, Vector3.zero);
+            Destroy(gameObject);
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
-            AudioSource.PlayClipAtPoint(deadSound, Vector3.zero);
             Destroy(other.gameObject);
-            Destroy(gameObject);
-            
+            health -= 100;
         }
     }
 
@@ -76,6 +103,26 @@ public class Alien : MonoBehaviour
     }
 
     public float GetY()
+    {
+        return y;
+    }
+    
+    public void SetMX(float mX)
+    {
+        this.mX = mX;
+    }
+
+    public float GetMX()
+    {
+        return x;
+    }
+
+    public void SetMY(float mY)
+    {
+        this.mY = mY;
+    }
+
+    public float GetMY()
     {
         return y;
     }

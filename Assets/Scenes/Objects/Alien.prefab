@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deadSound: {fileID: 8300000, guid: af66162561d2eed40ad49268cab318bb, type: 3}
+  bullet: {fileID: 7153555213712993457, guid: 36bd50f9543bd5149a7671200b4564d9, type: 3}
   mn: {fileID: 21300000, guid: e556d63148a4d2847bbe7d8c47b23c0c, type: 3}
   md: {fileID: 21300000, guid: e556d63148a4d2847bbe7d8c47b23c0c, type: 3}
   mg: {fileID: 21300000, guid: e556d63148a4d2847bbe7d8c47b23c0c, type: 3}

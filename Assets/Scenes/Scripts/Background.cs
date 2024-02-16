@@ -22,7 +22,7 @@ public class Background : MonoBehaviour
 
     private void FixedUpdate()
     {
-        y -= 0.13f;
+        y -= 0.10f;
         transform.position = new Vector3(0, y, 0.0f);
         if (y <= -54.3f)
         {

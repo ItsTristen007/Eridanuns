@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.TextCore.Text;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -13,7 +14,9 @@ public class Player : MonoBehaviour
     private int adjustY = 0;
     private int fireRate = 0;
     public AudioClip laserSound;
-    public AudioClip backgroundMusic; 
+    public AudioClip backgroundMusic;
+
+    private int health = 400;
     
 
     [SerializeField] GameObject bullet;
@@ -63,7 +66,12 @@ public class Player : MonoBehaviour
                 fireRate = 0;
             }
         }
-        
+
+        if (health <= 100)
+        {
+            Destroy(gameObject);
+            SceneManager.LoadScene("Title");
+        }
     }
     
     public void Create(string name, float x, float y)
@@ -79,21 +87,21 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (adjustX > 0) x += 0.032f;
-        if (adjustX > 50) x += 0.015f;
+        if (adjustX > 0) x += 0.052f;
+        if (adjustX > 50) x += 0.025f;
         if (adjustX > 70) x += 0.015f;
         if (adjustX > 125) x += 0.015f;
-        if (adjustX < 0) x += -0.032f;
-        if (adjustX < -50) x += -0.015f;
+        if (adjustX < 0) x += -0.052f;
+        if (adjustX < -50) x += -0.025f;
         if (adjustX < -70) x += -0.015f;
         if (adjustX < -125) x += -0.015f;
         
-        if (adjustY > 0) y += 0.032f;
-        if (adjustY > 50) y += 0.015f;
+        if (adjustY > 0) y += 0.052f;
+        if (adjustY > 50) y += 0.025f;
         if (adjustY > 70) y += 0.015f;
         if (adjustY > 125) y += 0.015f;
-        if (adjustY < 0) y += -0.032f;
-        if (adjustY < -50) y += -0.015f;
+        if (adjustY < 0) y += -0.052f;
+        if (adjustY < -50) y += -0.025f;
         if (adjustY < -70) y += -0.015f;
         if (adjustY < -125) y += -0.015f;
 
@@ -103,5 +111,14 @@ public class Player : MonoBehaviour
         if (y < -4.22) y = -4.22f;
         
         transform.position = new Vector3(x, y, -1f);
+    }
+    
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            Destroy(other.gameObject);
+            health -= 100;
+        }
     }
 }
