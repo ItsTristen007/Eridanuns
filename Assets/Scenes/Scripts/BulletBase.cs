@@ -10,8 +10,6 @@ public class BulletBase : MonoBehaviour
     private float y;
 
     public Sprite laser, md, mg;
-
-    private int dir = +1;
     
     public void Activate()
     {
@@ -20,9 +18,7 @@ public class BulletBase : MonoBehaviour
         switch (name)
         {
             case "laser":
-                GetComponent<SpriteRenderer>().sprite = laser; dir = +1; break;
-            case "blaster":
-                GetComponent<SpriteRenderer>().sprite = laser; dir = -1; tag = "Enemy"; break;
+                GetComponent<SpriteRenderer>().sprite = laser; break;
         }
     }
     
@@ -34,13 +30,13 @@ public class BulletBase : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        y += 0.16f*dir;
+        y += 0.16f;
         SetCoords();
     }
 
     private void Update()
     {
-        if (y >= 6 || y <= -6) Destroy(gameObject);
+        if (y >= 6) Destroy(this.gameObject);
     }
 
     public void SetX(float x)

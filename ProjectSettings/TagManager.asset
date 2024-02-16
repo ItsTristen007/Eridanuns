@@ -7,7 +7,6 @@ TagManager:
   - Border
   - Alien
   - Bullet
-  - Enemy
   layers:
   - Default
   - TransparentFX
