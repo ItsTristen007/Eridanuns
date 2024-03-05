@@ -12,14 +12,15 @@ public class Player : MonoBehaviour
     private float y = -3.5f;
     private int adjustX = 0;
     private int adjustY = 0;
-    private int fireRate = 0;
+    [SerializeField] private int fireRate = 0;
     public AudioClip laserSound;
     public AudioClip backgroundMusic;
 
-    private int health = 400;
+    [SerializeField] private int health = 400;
     
 
     [SerializeField] GameObject bullet;
+    public Transform bulletPos;
     
     // Start is called before the first frame update
     void Start()
@@ -62,7 +63,7 @@ public class Player : MonoBehaviour
         {
             if (fireRate > 80)
             {
-                Create("laser", x, y+.8f);
+                Shoot();
                 fireRate = 0;
             }
         }
@@ -74,16 +75,11 @@ public class Player : MonoBehaviour
         }
     }
     
-    public void Create(string name, float x, float y)
+    void Shoot()
     {
-        GameObject obj = Instantiate(bullet, new Vector3(0, 0, -1), Quaternion.identity);
-        BulletBase bul = obj.GetComponent<BulletBase>();
-        bul.name = name;
-        bul.SetX(x);
-        bul.SetY(y);
-        bul.Activate();
-        AudioSource.PlayClipAtPoint(laserSound, Vector3.zero);
+        Instantiate(bullet, bulletPos.position, Quaternion.identity);
     }
+
 
     private void FixedUpdate()
     {

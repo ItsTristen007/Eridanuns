@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Alien : MonoBehaviour
@@ -11,12 +12,16 @@ public class Alien : MonoBehaviour
     public AudioClip deadSound;
     
     [SerializeField] GameObject bullet;
-    private int shootTimer = 0;
+    public Transform bulletPos;
+    [SerializeField] private int shootTimer = 0;
 
-    private int health = 200;
+    [SerializeField] private int health = 200;
 
     private float mX;
     private float mY;
+
+    public GameObject player;
+    [SerializeField] public float speed;
 
     public Sprite mn, md, mg;
     
@@ -40,15 +45,10 @@ public class Alien : MonoBehaviour
     {
         this.transform.position = new Vector3(x, y, -1.0f);
     }
-    
-    public void Create(string name, float x, float y)
+
+    void Shoot()
     {
-        GameObject obj = Instantiate(bullet, new Vector3(0, 0, -1), Quaternion.identity);
-        BulletBase bul = obj.GetComponent<BulletBase>();
-        bul.name = name;
-        bul.SetX(x);
-        bul.SetY(y);
-        bul.Activate();
+        Instantiate(bullet, bulletPos.position, Quaternion.identity);
     }
 
     // Update is called once per frame
@@ -61,20 +61,25 @@ public class Alien : MonoBehaviour
         shootTimer++;
         if (shootTimer > 50)
         {
-            Create("blaster", x, y-.8f);
+            Shoot();
             shootTimer = 0;
         }
     }
 
     private void Update()
     {
-        if(x > 6 || x < -6 || y > 7 || y < -7) Destroy(gameObject);
 
         if (health <= 0)
         {
             AudioSource.PlayClipAtPoint(deadSound, Vector3.zero);
             Destroy(gameObject);
         }
+
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        Vector3 direction = player.transform.position - transform.position;
+        float rot = Mathf.Atan2(-direction.y, -direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0,0,rot - 90);
 
     }
 

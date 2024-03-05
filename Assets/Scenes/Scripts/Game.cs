@@ -7,13 +7,14 @@ using UnityEngine;
 public class Game : MonoBehaviour
 {
     [SerializeField] private GameObject alien;
+    public GameObject player;
 
     private int spawnTimer = 0;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        GameObject obj = Instantiate(player, new Vector3(0, -2.75f, -1), Quaternion.identity);
     }
 
     // Update is called once per frame
