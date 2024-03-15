@@ -8,6 +8,8 @@ TagManager:
   - Alien
   - Bullet
   - Enemy
+  - WestWaypoint
+  - EastWaypoint
   layers:
   - Default
   - TransparentFX

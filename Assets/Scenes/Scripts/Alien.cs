@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Alien : MonoBehaviour
 {
     private float x;
-    private float y;
+    private float y = 5.3f;
     private Rigidbody2D rb;
     public AudioClip deadSound;
     
@@ -23,13 +24,23 @@ public class Alien : MonoBehaviour
     public GameObject player;
     [SerializeField] public float speed;
 
+    private GameObject target;
+
     public Sprite mn, md, mg;
     
-    public void Activate()
+    void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        x = (Random.Range(0, 1201)/100f)-6;
         SetCoords();
 
+        if (x >= 0) target = GameObject.FindGameObjectsWithTag("WestWaypoint")[Random.Range(0,4)];
+        if (x < 0) target = GameObject.FindGameObjectsWithTag("EastWaypoint")[Random.Range(0,4)];
+    }
+
+    public void Activate()
+    {
         switch (name)
         {
             case "Mini":
@@ -43,7 +54,7 @@ public class Alien : MonoBehaviour
     
     public void SetCoords()
     {
-        this.transform.position = new Vector3(x, y, -1.0f);
+        transform.position = new Vector3(x, y, -1.0f);
     }
 
     void Shoot()
@@ -54,9 +65,6 @@ public class Alien : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        y -= mX;
-        x += mY;
-        SetCoords();
 
         shootTimer++;
         if (shootTimer > 50)
@@ -64,6 +72,9 @@ public class Alien : MonoBehaviour
             Shoot();
             shootTimer = 0;
         }
+        
+        Vector3 direction = target.transform.position - transform.position;
+        rb.velocity = new Vector2(direction.x, direction.y).normalized * speed;
     }
 
     private void Update()
@@ -80,6 +91,8 @@ public class Alien : MonoBehaviour
         Vector3 direction = player.transform.position - transform.position;
         float rot = Mathf.Atan2(-direction.y, -direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0,0,rot - 90);
+        
+        
 
     }
 

@@ -50,6 +50,8 @@ MonoBehaviour:
   deadSound: {fileID: 8300000, guid: af66162561d2eed40ad49268cab318bb, type: 3}
   bullet: {fileID: 7153555213712993457, guid: 36bd50f9543bd5149a7671200b4564d9, type: 3}
   bulletPos: {fileID: 6830029841352123559}
+  shootTimer: 0
+  health: 200
   player: {fileID: 3123554930248059653, guid: 7f6846028a10f934aa231d205be05302, type: 3}
   speed: 3
   mn: {fileID: 21300000, guid: e556d63148a4d2847bbe7d8c47b23c0c, type: 3}
@@ -95,7 +97,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

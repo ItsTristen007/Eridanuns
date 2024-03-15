@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEditor.TextCore.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -12,11 +13,16 @@ public class Player : MonoBehaviour
     private float y = -3.5f;
     private int adjustX = 0;
     private int adjustY = 0;
-    [SerializeField] private int fireRate = 0;
+    private int fireTimer = 0;
     public AudioClip laserSound;
     public AudioClip backgroundMusic;
 
-    [SerializeField] private int health = 400;
+    public Image healthBar;
+
+    public int fireRate = 0;
+    public int maxHealth = 400;
+    public int health = 400;
+    public float speed;
     
 
     [SerializeField] GameObject bullet;
@@ -34,7 +40,7 @@ public class Player : MonoBehaviour
     void Update()
     {
 
-        fireRate += 1;
+        fireTimer += 1;
         
         if (Input.GetKey(KeyCode.LeftArrow))
         {
@@ -59,16 +65,16 @@ public class Player : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow)) adjustX = 0;
         if (Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.UpArrow)) adjustY = 0;
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
         {
-            if (fireRate > 80)
+            if (fireTimer >= fireRate)
             {
                 Shoot();
-                fireRate = 0;
+                fireTimer = 0;
             }
         }
 
-        if (health <= 100)
+        if (health <= 0)
         {
             Destroy(gameObject);
             SceneManager.LoadScene("Title");
@@ -77,29 +83,29 @@ public class Player : MonoBehaviour
     
     void Shoot()
     {
-        Instantiate(bullet, bulletPos.position, Quaternion.identity);
+        Instantiate(bullet, bulletPos.position + Vector3.up/2f, Quaternion.identity);
     }
 
 
     private void FixedUpdate()
     {
-        if (adjustX > 0) x += 0.052f;
-        if (adjustX > 50) x += 0.025f;
-        if (adjustX > 70) x += 0.015f;
-        if (adjustX > 125) x += 0.015f;
-        if (adjustX < 0) x += -0.052f;
-        if (adjustX < -50) x += -0.025f;
-        if (adjustX < -70) x += -0.015f;
-        if (adjustX < -125) x += -0.015f;
+        if (adjustX > 0) x += 0.052f * speed;
+        if (adjustX > 50) x += 0.025f * speed;
+        if (adjustX > 70) x += 0.015f * speed;
+        if (adjustX > 125) x += 0.015f * speed;
+        if (adjustX < 0) x += -0.052f * speed;
+        if (adjustX < -50) x += -0.025f * speed;
+        if (adjustX < -70) x += -0.015f * speed;
+        if (adjustX < -125) x += -0.015f * speed;
         
-        if (adjustY > 0) y += 0.052f;
-        if (adjustY > 50) y += 0.025f;
-        if (adjustY > 70) y += 0.015f;
-        if (adjustY > 125) y += 0.015f;
-        if (adjustY < 0) y += -0.052f;
-        if (adjustY < -50) y += -0.025f;
-        if (adjustY < -70) y += -0.015f;
-        if (adjustY < -125) y += -0.015f;
+        if (adjustY > 0) y += 0.052f * speed;
+        if (adjustY > 50) y += 0.025f * speed;
+        if (adjustY > 70) y += 0.015f * speed;
+        if (adjustY > 125) y += 0.015f * speed;
+        if (adjustY < 0) y += -0.052f * speed;
+        if (adjustY < -50) y += -0.025f * speed;
+        if (adjustY < -70) y += -0.015f * speed;
+        if (adjustY < -125) y += -0.015f * speed;
 
         if (x > 5.12) x = 5.12f;
         if (x < -5.12) x = -5.12f;
