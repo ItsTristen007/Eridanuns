@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEditor.TextCore.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
@@ -17,16 +19,17 @@ public class Player : MonoBehaviour
     public AudioClip laserSound;
     public AudioClip backgroundMusic;
 
-    public Image healthBar;
+    public UnityEngine.UI.Image healthBar;
 
     public int fireRate = 0;
     public int maxHealth = 400;
     public int health = 400;
     public float speed;
-    
+
 
     [SerializeField] GameObject bullet;
     public Transform bulletPos;
+    [SerializeField] public UnityEngine.UI.Image stats;
     
     // Start is called before the first frame update
     void Start()
@@ -78,6 +81,11 @@ public class Player : MonoBehaviour
         {
             Destroy(gameObject);
             SceneManager.LoadScene("Title");
+        }
+
+        if (Input.GetKeyUp(KeyCode.Tab))
+        {
+            stats.enabled = !stats.enabled;  
         }
     }
     

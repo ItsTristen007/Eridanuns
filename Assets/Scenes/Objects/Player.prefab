@@ -49,11 +49,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laserSound: {fileID: 8300000, guid: 4310474905e266640852f43bd609a1a4, type: 3}
   backgroundMusic: {fileID: 8300000, guid: 06906d718be5b6a4cb2df8732bf39832, type: 3}
+  healthBar: {fileID: 0}
   fireRate: 110
+  maxHealth: 400
   health: 400
   speed: 1.25
   bullet: {fileID: 7153555213712993457, guid: 6079bc693a471aa4280a700a9de6c6fc, type: 3}
   bulletPos: {fileID: 3321889726280259534}
+  stats: {fileID: 0}
 --- !u!212 &9082511954088902503
 SpriteRenderer:
   m_ObjectHideFlags: 0
