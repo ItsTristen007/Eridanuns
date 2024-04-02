@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Boundary : MonoBehaviour
@@ -19,7 +18,7 @@ public class Boundary : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Bullet") || other.gameObject.CompareTag("Alien"))
+        if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Bullet") || other.gameObject.CompareTag("Alien") || other.gameObject.CompareTag("bigBullet"))
         {
             Destroy(other.gameObject);
         }

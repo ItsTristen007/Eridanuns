@@ -298,7 +298,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 523907500}
         m_TargetAssemblyTypeName: Game, Assembly-CSharp
-        m_MethodName: SelectCard1
+        m_MethodName: SelectCard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1205,7 +1205,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 523907500}
         m_TargetAssemblyTypeName: Game, Assembly-CSharp
-        m_MethodName: SelectCard3
+        m_MethodName: SelectCard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1432,16 +1432,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72315d70e717cdb4ea41dc31fd58e388, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alien: {fileID: 2362698095447718644, guid: 489e1e69b4138564b9a1d478d497d30e, type: 3}
+  mini: {fileID: 2362698095447718644, guid: 489e1e69b4138564b9a1d478d497d30e, type: 3}
+  midi: {fileID: 0}
+  magna: {fileID: 0}
+  boss: {fileID: 0}
+  taserCheck: {fileID: 8572714997483877766, guid: 03156116d1f42354dabb81994581b8cc, type: 3}
+  healDropCheck: {fileID: 8653395693433682112, guid: 86f345c1b1d61ca4e8a0c3a35ff1e913, type: 3}
   card1: {fileID: 51964036}
   card2: {fileID: 1015930995}
   card3: {fileID: 430709222}
-  healthUp: {fileID: 21300000, guid: b7aac8a00aa316445b4c7b5bfb091570, type: 3}
-  timeCut: {fileID: 21300000, guid: 0c8d0184b2399634a9eb45fca79e995a, type: 3}
-  speedUp: {fileID: 21300000, guid: 97d10f8d6d0a93a49846b33b40465e4b, type: 3}
-  healthUpActive: 0
-  timeCutActive: 0
-  speedUpActive: 0
+  healthUp: {fileID: 21300000, guid: 010a98929d835af4b9c44228b1aa6959, type: 3}
+  timeCut: {fileID: 21300000, guid: 52469494301e57c418dc7fd088f6c55b, type: 3}
+  speedUp: {fileID: 21300000, guid: e6a0dea94747d1048b0704ced76c9fe5, type: 3}
+  heal: {fileID: 21300000, guid: 3f3f5412921152842958337e2d29c962, type: 3}
+  healthDrop: {fileID: 21300000, guid: 57a22305f64bb594e99e1d9f5cc7116f, type: 3}
+  bigBullet: {fileID: 21300000, guid: 106ea13809f8706418baf5bb414d69b7, type: 3}
+  shotSpread: {fileID: 21300000, guid: 8d19839ee5533004caae748cd8037d56, type: 3}
+  healPlus: {fileID: 21300000, guid: 2059afce075c2cc47961e2b226b7312f, type: 3}
+  shield: {fileID: 21300000, guid: 8a49914a677afc040813508583ce827e, type: 3}
+  taser: {fileID: 21300000, guid: 31995bf478d512c479608cd80b70a619, type: 3}
+  timeCutPlus: {fileID: 21300000, guid: be7cc51c163585b449fe06897cfdc6d9, type: 3}
+  healthUpA: 0
+  timeCutA: 0
+  speedUpA: 0
+  healA: 0
+  healthDropA: 0
+  bigBulletA: 1
+  shotSpreadA: 0
+  healPlusA: 0
+  shieldA: 0
+  taserA: 0
+  timeCutPlusA: 0
   progressBar: {fileID: 670298460}
   healthBar: {fileID: 1034407044}
   player: {fileID: 3123554930248059653, guid: 7f6846028a10f934aa231d205be05302, type: 3}
@@ -2050,7 +2071,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 523907500}
         m_TargetAssemblyTypeName: Game, Assembly-CSharp
-        m_MethodName: SelectCard2
+        m_MethodName: SelectCard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

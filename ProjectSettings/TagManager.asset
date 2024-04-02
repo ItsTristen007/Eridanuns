@@ -10,6 +10,9 @@ TagManager:
   - Enemy
   - WestWaypoint
   - EastWaypoint
+  - taserCheck
+  - healDropCheck
+  - bigBullet
   layers:
   - Default
   - TransparentFX

@@ -1,12 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
-using UnityEditor.TextCore.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
@@ -19,17 +16,19 @@ public class Player : MonoBehaviour
     public AudioClip laserSound;
     public AudioClip backgroundMusic;
 
-    public UnityEngine.UI.Image healthBar;
+    public Image healthBar;
 
     public int fireRate = 0;
     public int maxHealth = 400;
     public int health = 400;
     public float speed;
 
+    public bool shotSpreadA, bigBulletA;
 
-    [SerializeField] GameObject bullet;
+
+    [SerializeField] GameObject bullet, bigBullet;
     public Transform bulletPos;
-    [SerializeField] public UnityEngine.UI.Image stats;
+    [SerializeField] Image stats;
     
     // Start is called before the first frame update
     void Start()
@@ -76,6 +75,29 @@ public class Player : MonoBehaviour
                 fireTimer = 0;
             }
         }
+        
+        if (adjustX > 0) x += 0.052f * speed;
+        /*if (adjustX > 50) x += 0.025f * speed;
+        if (adjustX > 70) x += 0.015f * speed;
+        if (adjustX > 125) x += 0.015f * speed;*/
+        if (adjustX < 0) x += -0.052f * speed;
+        /*if (adjustX < -50) x += -0.025f * speed;
+        if (adjustX < -70) x += -0.015f * speed;
+        if (adjustX < -125) x += -0.015f * speed;*/
+        
+        if (adjustY > 0) y += 0.052f * speed;
+        /*if (adjustY > 50) y += 0.025f * speed;
+        if (adjustY > 70) y += 0.015f * speed;
+        if (adjustY > 125) y += 0.015f * speed;*/
+        if (adjustY < 0) y += -0.052f * speed;
+        /*if (adjustY < -50) y += -0.025f * speed;
+        if (adjustY < -70) y += -0.015f * speed;
+        if (adjustY < -125) y += -0.015f * speed;*/
+
+        if (x > 5.12) x = 5.12f;
+        if (x < -5.12) x = -5.12f;
+        if (y > 4.22) y = 4.22f;
+        if (y < -4.22) y = -4.22f;
 
         if (health <= 0)
         {
@@ -91,34 +113,33 @@ public class Player : MonoBehaviour
     
     void Shoot()
     {
-        Instantiate(bullet, bulletPos.position + Vector3.up/2f, Quaternion.identity);
+        if (!bigBulletA)
+        {
+            Instantiate(bullet, bulletPos.position + Vector3.up / 1.5f, Quaternion.identity);
+
+            if (shotSpreadA)
+            {
+                Instantiate(bullet, bulletPos.position + Vector3.right / 4f + Vector3.up / 2f, Quaternion.identity);
+                Instantiate(bullet, bulletPos.position + Vector3.left / 4f + Vector3.up / 2f, Quaternion.identity);
+            }
+        }
+
+        if (bigBulletA)
+        {
+            Instantiate(bigBullet, bulletPos.position + Vector3.up / 1.5f, Quaternion.identity);
+
+            if (shotSpreadA)
+            {
+                Instantiate(bigBullet, bulletPos.position + Vector3.right / 4f + Vector3.up / 2f, Quaternion.identity);
+                Instantiate(bigBullet, bulletPos.position + Vector3.left / 4f + Vector3.up / 2f, Quaternion.identity);
+            }
+        }
     }
 
 
     private void FixedUpdate()
     {
-        if (adjustX > 0) x += 0.052f * speed;
-        if (adjustX > 50) x += 0.025f * speed;
-        if (adjustX > 70) x += 0.015f * speed;
-        if (adjustX > 125) x += 0.015f * speed;
-        if (adjustX < 0) x += -0.052f * speed;
-        if (adjustX < -50) x += -0.025f * speed;
-        if (adjustX < -70) x += -0.015f * speed;
-        if (adjustX < -125) x += -0.015f * speed;
         
-        if (adjustY > 0) y += 0.052f * speed;
-        if (adjustY > 50) y += 0.025f * speed;
-        if (adjustY > 70) y += 0.015f * speed;
-        if (adjustY > 125) y += 0.015f * speed;
-        if (adjustY < 0) y += -0.052f * speed;
-        if (adjustY < -50) y += -0.025f * speed;
-        if (adjustY < -70) y += -0.015f * speed;
-        if (adjustY < -125) y += -0.015f * speed;
-
-        if (x > 5.12) x = 5.12f;
-        if (x < -5.12) x = -5.12f;
-        if (y > 4.22) y = 4.22f;
-        if (y < -4.22) y = -4.22f;
         
         transform.position = new Vector3(x, y, -1f);
     }

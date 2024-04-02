@@ -14,12 +14,13 @@ public class Alien : MonoBehaviour
     
     [SerializeField] GameObject bullet;
     public Transform bulletPos;
-    [SerializeField] private int shootTimer = 0;
+    private int shootTimer = 0;
+    public int shootRate = 0;
 
     [SerializeField] private int health = 200;
 
-    private float mX;
-    private float mY;
+    private bool taser;
+    float taserStart, taserTimer;
 
     public GameObject player;
     [SerializeField] public float speed;
@@ -44,11 +45,20 @@ public class Alien : MonoBehaviour
         switch (name)
         {
             case "Mini":
-                GetComponent<SpriteRenderer>().sprite = mn; break;
+                health = 200;
+                speed = 3;
+                shootRate = 60;
+                break;
             case "Midi":
-                GetComponent<SpriteRenderer>().sprite = md; break;
+                health = 300;
+                speed = 2.5f;
+                shootRate = 70;
+                break;
             case "Magna":
-                GetComponent<SpriteRenderer>().sprite = mg; break;
+                health = 400;
+                speed = 2;
+                shootRate = 80;
+                break;
         }
     }
     
@@ -67,14 +77,27 @@ public class Alien : MonoBehaviour
     {
 
         shootTimer++;
-        if (shootTimer > 50)
+        if (shootTimer > shootRate)
         {
             Shoot();
             shootTimer = 0;
         }
+
+        if (!taser)
+        {
+            Vector3 direction = target.transform.position - transform.position;
+            rb.velocity = new Vector2(direction.x, direction.y).normalized * speed;
+        }
+
+        if (taser)
+        {
+            rb.velocity = new Vector2(0,0);
+        }
+
         
-        Vector3 direction = target.transform.position - transform.position;
-        rb.velocity = new Vector2(direction.x, direction.y).normalized * speed;
+        
+        if (taser) taserTimer += Time.deltaTime;
+        if (taserTimer >= taserStart + 0.15f) taser = false;
     }
 
     private void Update()
@@ -82,6 +105,7 @@ public class Alien : MonoBehaviour
 
         if (health <= 0)
         {
+            if (GameObject.FindGameObjectWithTag("healDropCheck") && Random.Range(0, 4) == 0) ;
             AudioSource.PlayClipAtPoint(deadSound, Vector3.zero);
             Destroy(gameObject);
         }
@@ -100,7 +124,23 @@ public class Alien : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
+            if (GameObject.FindGameObjectWithTag("taserCheck"))
+            {
+                taser = true;
+                taserStart = Time.time;
+                taserTimer = taserStart;
+            }
             Destroy(other.gameObject);
+            health -= 100;
+        }
+        if (other.gameObject.CompareTag("bigBullet"))
+        {
+            if (GameObject.FindGameObjectWithTag("taserCheck"))
+            {
+                taser = true;
+                taserStart = Time.time;
+                taserTimer = taserStart;
+            }
             health -= 100;
         }
     }
@@ -124,20 +164,10 @@ public class Alien : MonoBehaviour
     {
         return y;
     }
-    
-    public void SetMX(float mX)
-    {
-        this.mX = mX;
-    }
 
     public float GetMX()
     {
         return x;
-    }
-
-    public void SetMY(float mY)
-    {
-        this.mY = mY;
     }
 
     public float GetMY()
