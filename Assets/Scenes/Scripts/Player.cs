@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        AudioSource.PlayClipAtPoint(backgroundMusic, Vector3.zero,0.5f);
+        AudioSource.PlayClipAtPoint(backgroundMusic, Vector3.zero,1);
         
         
     }
@@ -102,6 +102,8 @@ public class Player : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject);
+           int s =  GameObject.FindGameObjectWithTag("score").GetComponent<Game>().score;
+            ScoreDisplay.score = s;
             SceneManager.LoadScene("GameOver");
         }
 
@@ -118,6 +120,7 @@ public class Player : MonoBehaviour
             if (!bigBulletA)
             {
                 Instantiate(bullet, bulletPos.position + Vector3.up / 1.5f, Quaternion.identity);
+                AudioSource.PlayClipAtPoint(laserSound, Vector3.zero, 1);
 
                 if (shotSpreadA)
                 {
@@ -129,6 +132,7 @@ public class Player : MonoBehaviour
             if (bigBulletA)
             {
                 Instantiate(bigBullet, bulletPos.position + Vector3.up / 1.5f, Quaternion.identity);
+                AudioSource.PlayClipAtPoint(laserSound, Vector3.zero, 1);
 
                 if (shotSpreadA)
                 {

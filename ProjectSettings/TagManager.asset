@@ -19,6 +19,9 @@ TagManager:
   - vampCheck
   - damageCheck
   - melee
+  - PauseUI
+  - score
+  - Play
   layers:
   - Default
   - TransparentFX

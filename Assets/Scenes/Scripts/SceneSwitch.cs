@@ -7,10 +7,12 @@ using UnityEngine.SceneManagement;
 public class SceneSwitch : MonoBehaviour
 {
     [SerializeField] Button b;
+    
 
     private void Start()
     {
         b.onClick.AddListener(Next);
+        
     }
 
     void Next()
@@ -22,7 +24,9 @@ public class SceneSwitch : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "GameOver")
         {
             SceneManager.LoadScene("Game");
-        } 
+        }
+
+        
         
     }
 }
