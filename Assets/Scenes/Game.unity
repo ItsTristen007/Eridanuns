@@ -3601,7 +3601,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9116094175080349693, guid: 9b659188a3be4964cbc8528ed6486430, type: 3}
       propertyPath: meteorA
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9116094175080349693, guid: 9b659188a3be4964cbc8528ed6486430, type: 3}
       propertyPath: meteors
