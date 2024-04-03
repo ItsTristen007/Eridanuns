@@ -15,9 +15,14 @@ public class SceneSwitch : MonoBehaviour
 
     void Next()
     {
-        if (SceneManager.GetActiveScene().ToString().Equals("Title") | SceneManager.GetActiveScene().ToString().Equals("GameOver")) ;
+        if (SceneManager.GetActiveScene().name == "Title")
+        {
+            SceneManager.LoadScene("Tutorial");
+        } 
+        if (SceneManager.GetActiveScene().name == "GameOver")
         {
             SceneManager.LoadScene("Game");
         } 
+        
     }
 }
