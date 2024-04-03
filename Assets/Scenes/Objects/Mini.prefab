@@ -56,6 +56,8 @@ MonoBehaviour:
   explosion: {fileID: 7544197482208625878, guid: b216af078dec1e745a71d5a4227cf2a4, type: 3}
   bulletPos: {fileID: 6830029841352123559}
   shootRate: 70
+  damageColor: {r: 1, g: 0, b: 0, a: 1}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
   health: 200
   speed: 3
 --- !u!212 &-8440462268409354860

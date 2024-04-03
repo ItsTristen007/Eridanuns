@@ -21,6 +21,11 @@ public class Alien : MonoBehaviour
     public Transform bulletPos;
     private int shootTimer = 0;
     public int shootRate = 0;
+    
+    public Color damageColor, normalColor;
+    private SpriteRenderer rend;
+    private float damageTick;
+    private bool damageTaken;
 
     private int damageCheck;
 
@@ -109,6 +114,20 @@ public class Alien : MonoBehaviour
 
     private void Update()
     {
+        
+        
+        if (damageTaken)
+        {
+            damageTick += Time.deltaTime;
+        }
+
+        if (damageTick >= 0.1f)
+        {
+            damageTaken = false;
+            rend = GetComponent<SpriteRenderer>();
+            rend.color = normalColor;
+        }
+
         player = GameObject.FindGameObjectWithTag("Player");
         Player pl = player.GetComponent<Player>();
         
@@ -147,6 +166,10 @@ public class Alien : MonoBehaviour
 
             Destroy(other.gameObject);
             health -= 100 + 50 * damageCheck;
+            damageTick = 0;
+            damageTaken = true;
+            rend = GetComponent<SpriteRenderer>();
+            rend.color = damageColor;
         }
 
         if (other.gameObject.CompareTag("bigBullet"))
@@ -156,9 +179,14 @@ public class Alien : MonoBehaviour
                 taser = true;
                 taserStart = Time.time;
                 taserTimer = taserStart;
+                
             }
 
             health -= 200 + 50 * damageCheck;
+            damageTick = 0;
+            damageTaken = true;
+            rend = GetComponent<SpriteRenderer>();
+            rend.color = damageColor;
         }
 
         if (other.gameObject.CompareTag("melee"))
@@ -170,6 +198,10 @@ public class Alien : MonoBehaviour
                 taserTimer = taserStart;
             }
             health -= 400 + 50 * damageCheck;
+            damageTick = 0;
+            damageTaken = true;
+            rend = GetComponent<SpriteRenderer>();
+            rend.color = damageColor;
         }
     }
 
@@ -178,6 +210,10 @@ public class Alien : MonoBehaviour
         if (other.gameObject.CompareTag("beam"))
         {
             health -= 7 + 2 * damageCheck;
+            damageTick = 0;
+            damageTaken = true;
+            rend = GetComponent<SpriteRenderer>();
+            rend.color = damageColor;
         }
     }
 

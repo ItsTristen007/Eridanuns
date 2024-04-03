@@ -50,6 +50,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laserSound: {fileID: 8300000, guid: 8765714b5c19e5242be8d0cf455e710c, type: 3}
   backgroundMusic: {fileID: 8300000, guid: 06906d718be5b6a4cb2df8732bf39832, type: 3}
+  damageColor: {r: 1, g: 0, b: 0, a: 1}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
   healthBar: {fileID: 0}
   fireRate: 20
   maxHealth: 400

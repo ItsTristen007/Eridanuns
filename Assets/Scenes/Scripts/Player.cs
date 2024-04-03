@@ -16,6 +16,11 @@ public class Player : MonoBehaviour
     public AudioClip laserSound;
     public AudioClip backgroundMusic;
 
+    public Color damageColor, normalColor;
+    private SpriteRenderer rend;
+    private float damageTick;
+    private bool damageTaken;
+
     public Image healthBar;
 
     public int fireRate = 0;
@@ -42,7 +47,17 @@ public class Player : MonoBehaviour
     void Update()
     {
 
-        
+        if (damageTaken)
+        {
+            damageTick += Time.deltaTime;
+        }
+
+        if (damageTick >= 0.1f)
+        {
+            damageTaken = false;
+            rend = GetComponent<SpriteRenderer>();
+            rend.color = normalColor;
+        }
         
         if (Input.GetKey(KeyCode.LeftArrow) && Time.timeScale == 1)
         {
@@ -178,6 +193,10 @@ public class Player : MonoBehaviour
             else
             {
                 health -= 100;
+                damageTick = 0;
+                damageTaken = true;
+                rend = GetComponent<SpriteRenderer>();
+                rend.color = damageColor;
             }
             
         }
