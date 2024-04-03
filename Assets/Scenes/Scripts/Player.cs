@@ -23,10 +23,10 @@ public class Player : MonoBehaviour
     public int health = 400;
     public float speed;
 
-    public bool shotSpreadA, bigBulletA;
+    public bool shotSpreadA, bigBulletA, shieldA, meleeA;
 
 
-    [SerializeField] GameObject bullet, bigBullet;
+    [SerializeField] GameObject bullet, bigBullet, shield, melee;
     public Transform bulletPos;
     [SerializeField] Image stats;
     
@@ -44,30 +44,30 @@ public class Player : MonoBehaviour
 
         fireTimer += 1;
         
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow) && Time.timeScale == 1)
         {
             adjustX += -1;
         }
         
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow) && Time.timeScale == 1)
         {
             adjustX += 1;
         }
 
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.UpArrow) && Time.timeScale == 1)
         {
             adjustY += 1;
         }
 
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.DownArrow) && Time.timeScale == 1)
         {
             adjustY -= 1;
         }
         
-        if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow)) adjustX = 0;
-        if (Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.UpArrow)) adjustY = 0;
+        if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow) && Time.timeScale == 1) adjustX = 0;
+        if (Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.UpArrow) && Time.timeScale == 1) adjustY = 0;
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && Time.timeScale == 1)
         {
             if (fireTimer >= fireRate)
             {
@@ -77,22 +77,22 @@ public class Player : MonoBehaviour
         }
         
         if (adjustX > 0) x += 0.052f * speed;
-        /*if (adjustX > 50) x += 0.025f * speed;
+        if (adjustX > 50) x += 0.025f * speed;
         if (adjustX > 70) x += 0.015f * speed;
-        if (adjustX > 125) x += 0.015f * speed;*/
+        if (adjustX > 125) x += 0.015f * speed;
         if (adjustX < 0) x += -0.052f * speed;
-        /*if (adjustX < -50) x += -0.025f * speed;
+        if (adjustX < -50) x += -0.025f * speed;
         if (adjustX < -70) x += -0.015f * speed;
-        if (adjustX < -125) x += -0.015f * speed;*/
+        if (adjustX < -125) x += -0.015f * speed;
         
         if (adjustY > 0) y += 0.052f * speed;
-        /*if (adjustY > 50) y += 0.025f * speed;
+        if (adjustY > 50) y += 0.025f * speed;
         if (adjustY > 70) y += 0.015f * speed;
-        if (adjustY > 125) y += 0.015f * speed;*/
+        if (adjustY > 125) y += 0.015f * speed;
         if (adjustY < 0) y += -0.052f * speed;
-        /*if (adjustY < -50) y += -0.025f * speed;
+        if (adjustY < -50) y += -0.025f * speed;
         if (adjustY < -70) y += -0.015f * speed;
-        if (adjustY < -125) y += -0.015f * speed;*/
+        if (adjustY < -125) y += -0.015f * speed;
 
         if (x > 5.12) x = 5.12f;
         if (x < -5.12) x = -5.12f;
@@ -113,34 +113,48 @@ public class Player : MonoBehaviour
     
     void Shoot()
     {
-        if (!bigBulletA)
+        if (!meleeA)
         {
-            Instantiate(bullet, bulletPos.position + Vector3.up / 1.5f, Quaternion.identity);
-
-            if (shotSpreadA)
+            if (!bigBulletA)
             {
-                Instantiate(bullet, bulletPos.position + Vector3.right / 4f + Vector3.up / 2f, Quaternion.identity);
-                Instantiate(bullet, bulletPos.position + Vector3.left / 4f + Vector3.up / 2f, Quaternion.identity);
+                Instantiate(bullet, bulletPos.position + Vector3.up / 1.5f, Quaternion.identity);
+
+                if (shotSpreadA)
+                {
+                    Instantiate(bullet, bulletPos.position + Vector3.right / 4f + Vector3.up / 2f, Quaternion.identity);
+                    Instantiate(bullet, bulletPos.position + Vector3.left / 4f + Vector3.up / 2f, Quaternion.identity);
+                }
+            }
+
+            if (bigBulletA)
+            {
+                Instantiate(bigBullet, bulletPos.position + Vector3.up / 1.5f, Quaternion.identity);
+
+                if (shotSpreadA)
+                {
+                    Instantiate(bigBullet, bulletPos.position + Vector3.right / 4f + Vector3.up / 2f,
+                        Quaternion.identity);
+                    Instantiate(bigBullet, bulletPos.position + Vector3.left / 4f + Vector3.up / 2f,
+                        Quaternion.identity);
+                }
             }
         }
 
-        if (bigBulletA)
+        if (meleeA)
         {
-            Instantiate(bigBullet, bulletPos.position + Vector3.up / 1.5f, Quaternion.identity);
-
-            if (shotSpreadA)
-            {
-                Instantiate(bigBullet, bulletPos.position + Vector3.right / 4f + Vector3.up / 2f, Quaternion.identity);
-                Instantiate(bigBullet, bulletPos.position + Vector3.left / 4f + Vector3.up / 2f, Quaternion.identity);
-            }
+            Instantiate(melee, bulletPos.position, Quaternion.identity);
         }
     }
 
-
+    private bool shieldUp = false;
     private void FixedUpdate()
     {
-        
-        
+
+        if (shieldA && !shieldUp)
+        {
+            shieldUp = true;
+            Instantiate(shield, bulletPos.position, Quaternion.identity);
+        }
         transform.position = new Vector3(x, y, -1f);
     }
     
@@ -149,7 +163,23 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("Enemy"))
         {
             Destroy(other.gameObject);
-            health -= 100;
+            if (shieldUp)
+            {
+                Destroy(GameObject.FindWithTag("Shield"));
+                shieldUp = false;
+                shieldA = false;
+            }
+            else
+            {
+                health -= 100;
+            }
+            
+        }
+
+        if (other.gameObject.CompareTag("HealthDrop"))
+        {
+            if (health < maxHealth) health += 100;
+            Destroy(other.gameObject);
         }
     }
 }

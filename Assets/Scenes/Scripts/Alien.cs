@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using UnityEditor.Animations;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -13,21 +14,28 @@ public class Alien : MonoBehaviour
     public AudioClip deadSound;
     
     [SerializeField] GameObject bullet;
+    public GameObject game;
+    public GameObject player;
+    public GameObject healthDrop;
+    public GameObject explosion;
+    
     public Transform bulletPos;
     private int shootTimer = 0;
     public int shootRate = 0;
+
+    private int damageCheck;
+
+    private int level;
 
     [SerializeField] private int health = 200;
 
     private bool taser;
     float taserStart, taserTimer;
 
-    public GameObject player;
+    
     [SerializeField] public float speed;
 
     private GameObject target;
-
-    public Sprite mn, md, mg;
     
     void Start()
     {
@@ -45,19 +53,19 @@ public class Alien : MonoBehaviour
         switch (name)
         {
             case "Mini":
-                health = 200;
+                health = 200 + 50 * level;
                 speed = 3;
-                shootRate = 60;
+                shootRate = 60 + 1 * level;
                 break;
             case "Midi":
-                health = 300;
+                health = 300 + 50 * level;
                 speed = 2.5f;
-                shootRate = 70;
+                shootRate = 70 + 1 * level;
                 break;
             case "Magna":
-                health = 400;
+                health = 500 + 75 * level;
                 speed = 2;
-                shootRate = 80;
+                shootRate = 80 + 1 * level;
                 break;
         }
     }
@@ -102,15 +110,21 @@ public class Alien : MonoBehaviour
 
     private void Update()
     {
-
+        player = GameObject.FindGameObjectWithTag("Player");
+        Player pl = player.GetComponent<Player>();
+        
+        
         if (health <= 0)
         {
-            if (GameObject.FindGameObjectWithTag("healDropCheck") && Random.Range(0, 4) == 0) ;
+            if (GameObject.FindGameObjectWithTag("healDropCheck") && Random.Range(0, 3) == 0) Instantiate(healthDrop, bulletPos.position, Quaternion.identity); else if (Random.Range(0, 6) == 0) Instantiate(healthDrop, bulletPos.position, Quaternion.identity);
+            GameObject.Find("Plane").GetComponent<Game>().score += name == "Mini" ? (int)Mathf.Round( 100 + 100 * 0.1f * level) : name == "Midi" ? (int)Mathf.Round(200 + 200 * 0.1f * level) : (int)Mathf.Round( 400 + 400 * 0.1f * level);
             AudioSource.PlayClipAtPoint(deadSound, Vector3.zero);
+            if (GameObject.FindGameObjectWithTag("healDropCheck") && pl.health <= pl.maxHealth - 50) pl.health += 50;
+            Instantiate(explosion, bulletPos.position, Quaternion.identity);
             Destroy(gameObject);
         }
 
-        player = GameObject.FindGameObjectWithTag("Player");
+        
 
         Vector3 direction = player.transform.position - transform.position;
         float rot = Mathf.Atan2(-direction.y, -direction.x) * Mathf.Rad2Deg;
@@ -122,6 +136,7 @@ public class Alien : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        damageCheck = GameObject.FindGameObjectsWithTag("damageCheck").Length;
         if (other.gameObject.CompareTag("Bullet"))
         {
             if (GameObject.FindGameObjectWithTag("taserCheck"))
@@ -130,9 +145,11 @@ public class Alien : MonoBehaviour
                 taserStart = Time.time;
                 taserTimer = taserStart;
             }
+
             Destroy(other.gameObject);
-            health -= 100;
+            health -= 100 + 50 * damageCheck;
         }
+
         if (other.gameObject.CompareTag("bigBullet"))
         {
             if (GameObject.FindGameObjectWithTag("taserCheck"))
@@ -141,7 +158,27 @@ public class Alien : MonoBehaviour
                 taserStart = Time.time;
                 taserTimer = taserStart;
             }
-            health -= 100;
+
+            health -= 100 + 50 * damageCheck;
+        }
+
+        if (other.gameObject.CompareTag("melee"))
+        {
+            if (GameObject.FindGameObjectWithTag("taserCheck"))
+            {
+                taser = true;
+                taserStart = Time.time;
+                taserTimer = taserStart;
+            }
+            health -= 100 + 50 * damageCheck;
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("beam"))
+        {
+            health -= 7 + 2 * damageCheck;
         }
     }
 
@@ -173,5 +210,10 @@ public class Alien : MonoBehaviour
     public float GetMY()
     {
         return y;
+    }
+
+    public void SetLevel(int level)
+    {
+        this.level = level;
     }
 }

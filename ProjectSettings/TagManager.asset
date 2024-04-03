@@ -13,6 +13,12 @@ TagManager:
   - taserCheck
   - healDropCheck
   - bigBullet
+  - HealthDrop
+  - Shield
+  - beam
+  - vampCheck
+  - damageCheck
+  - melee
   layers:
   - Default
   - TransparentFX

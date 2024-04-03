@@ -18,7 +18,7 @@ public class Boundary : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Bullet") || other.gameObject.CompareTag("Alien") || other.gameObject.CompareTag("bigBullet"))
+        if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Bullet") || other.gameObject.CompareTag("Alien") || other.gameObject.CompareTag("bigBullet") || other.gameObject.CompareTag("HealthDrop"))
         {
             Destroy(other.gameObject);
         }
