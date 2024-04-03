@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class SceneSwitch : MonoBehaviour
 {
     [SerializeField] Button b;
+
+    public AudioClip buttonSound;
     
 
     private void Start()
@@ -28,5 +30,10 @@ public class SceneSwitch : MonoBehaviour
 
         
         
+    }
+
+    public void Audio()
+    {
+        AudioSource.PlayClipAtPoint(buttonSound, Vector3.zero,1f);
     }
 }

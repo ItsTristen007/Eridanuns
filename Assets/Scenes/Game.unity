@@ -763,7 +763,7 @@ Transform:
   m_GameObject: {fileID: 177211361}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -12.077801, z: 0}
+  m_LocalPosition: {x: 0, y: -16.04, z: 0}
   m_LocalScale: {x: 17.8192, y: 1.8957, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2545,7 +2545,7 @@ Transform:
   m_GameObject: {fileID: 1207395845}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 25.94, y: -4.72, z: 0}
+  m_LocalPosition: {x: 24.8456, y: -4.72, z: 0}
   m_LocalScale: {x: -1.0195976, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2819,7 +2819,7 @@ Transform:
   m_GameObject: {fileID: 1340261892}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 28.5807, y: -1.0199995, z: 0}
+  m_LocalPosition: {x: 27.486298, y: -1.0199995, z: 0}
   m_LocalScale: {x: -1.0195976, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2956,8 +2956,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Score Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 96b2da864442dda4c948182ec710276e, type: 2}
+  m_sharedMaterial: {fileID: 3846398502525592161, guid: 96b2da864442dda4c948182ec710276e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3252,7 +3252,7 @@ Transform:
   m_GameObject: {fileID: 1617879778}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 28.2544, y: -2.5199995, z: 0}
+  m_LocalPosition: {x: 27.16, y: -2.5199995, z: 0}
   m_LocalScale: {x: -1.0195976, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3530,7 +3530,7 @@ Transform:
   m_GameObject: {fileID: 1929552457}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 27.4387, y: -3.8499994, z: 0}
+  m_LocalPosition: {x: 26.3443, y: -3.8499994, z: 0}
   m_LocalScale: {x: -1.0195976, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3647,8 +3647,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Level Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 96b2da864442dda4c948182ec710276e, type: 2}
+  m_sharedMaterial: {fileID: 3846398502525592161, guid: 96b2da864442dda4c948182ec710276e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4055,6 +4055,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 7111349477362882452, guid: 9b659188a3be4964cbc8528ed6486430, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 143793b8418940f4ebe230bd36766801, type: 2}
     - target: {fileID: 9116094175080349693, guid: 9b659188a3be4964cbc8528ed6486430, type: 3}
       propertyPath: Exit
       value: 
@@ -4108,6 +4112,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9116094175080349693, guid: 9b659188a3be4964cbc8528ed6486430, type: 3}
+      propertyPath: taser
+      value: 
+      objectReference: {fileID: 21300000, guid: 14527c2211b51214689c6a8cf0f3e02e, type: 3}
+    - target: {fileID: 9116094175080349693, guid: 9b659188a3be4964cbc8528ed6486430, type: 3}
+      propertyPath: damage
+      value: 
+      objectReference: {fileID: 21300000, guid: 0d57f23200b26d4468d34b672d5d3f6b, type: 3}
+    - target: {fileID: 9116094175080349693, guid: 9b659188a3be4964cbc8528ed6486430, type: 3}
       propertyPath: friend
       value: 
       objectReference: {fileID: 21300000, guid: 4666b3a66cfffc24c8ff61a08d38b6d4, type: 3}
@@ -4127,6 +4139,14 @@ PrefabInstance:
       propertyPath: meteors
       value: 
       objectReference: {fileID: 6966175094543445166, guid: 620d0f1b39be60e4bbcba64fb7afaa30, type: 3}
+    - target: {fileID: 9116094175080349693, guid: 9b659188a3be4964cbc8528ed6486430, type: 3}
+      propertyPath: speedUp
+      value: 
+      objectReference: {fileID: 21300000, guid: 491ba7dbaa0974c498b8dca498f00477, type: 3}
+    - target: {fileID: 9116094175080349693, guid: 9b659188a3be4964cbc8528ed6486430, type: 3}
+      propertyPath: timeCut
+      value: 
+      objectReference: {fileID: 21300000, guid: 82a56450fef6c4c42842fabd7b394502, type: 3}
     - target: {fileID: 9116094175080349693, guid: 9b659188a3be4964cbc8528ed6486430, type: 3}
       propertyPath: beamReal
       value: 

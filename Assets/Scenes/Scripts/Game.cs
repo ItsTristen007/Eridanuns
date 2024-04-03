@@ -58,21 +58,15 @@ public class Game : MonoBehaviour
             {
                 Time.timeScale = 0; Exit.enabled = true;
                 Exit.gameObject.SetActive(true);
-
             }
-                
-                    
-                    
         }
     }
 
-   
-
+    
     void Back()
     {
         SceneManager.LoadScene("Title");
-       
-
+        
     }
 
     void FixedUpdate()
@@ -90,9 +84,9 @@ public class Game : MonoBehaviour
             {
                 switch (Random.Range(0, 7))
                 {
-                    case 0: case 1: case 2: case 3: SpawnEnemy("Mini"); spawnInterval = 1.5f - 0.01f * level; break;
-                    case 4: case 5: SpawnEnemy("Midi"); spawnInterval = 2f - 0.01f * level; break;
-                    case 6: SpawnEnemy("Magna"); spawnInterval = 2.5f - 0.01f * level; break;
+                    case 0: case 1: case 2: case 3: SpawnEnemy("Mini"); spawnInterval = 1.5f - 0.07f * level; break;
+                    case 4: case 5: SpawnEnemy("Midi"); spawnInterval = 2f - 0.07f * level; break;
+                    case 6: SpawnEnemy("Magna"); spawnInterval = 2.5f - 0.07f * level; break;
                 }
                 spawnTimer = 0;
             }
@@ -134,16 +128,16 @@ public class Game : MonoBehaviour
         GameObject p = GameObject.Find("Player(Clone)");
         Player play = p.GetComponent<Player>();
         loop = ha;
-        while(loop > 0) { if (healA && play.health < play.maxHealth) { play.health += 100; } loop -= 1; }
         if (healthUpA){ play.maxHealth = 400 + 100 *  hua; healthUpA = false;}
-        if (speedUpA && sua == 0) { play.speed += 1f; play.fireRate -= 10; sua = 1; }
+        while(loop > 0) { if (healA && play.health < play.maxHealth) { play.health += 100; } loop -= 1; }
+        if (speedUpA && sua == 0) { play.speed += 0.4f; play.fireRate -= 7; sua = 1; }
         if (timeCutA && tca == 0) { levelLength -= 2; tca = 1; }
         if (healthDropA && hda == 0) { Instantiate(healDropCheck, new Vector3(300, 300, -1), Quaternion.identity); hda = 1; }
         if (bigBulletA && bba == 0) { play.bigBulletA = true; bba = 1; }
         if (shotSpreadA && ssa == 0) { play.shotSpreadA = true; ssa = 1; }
+        if (healPlusA && play.health < play.maxHealth) play.health += 100; hpa = 1;
         if (healPlusA && play.health < play.maxHealth) play.health += 100;
-        if (healPlusA && play.health < play.maxHealth) play.health += 100;
-        if (shieldA && sa == 0) { play.shieldA = true; }
+        if (shieldA && sa == 0) { play.shieldA = true; sa = 1; }
         if (taserA && ta == 0) { Instantiate(taserCheck, new Vector3(300, 300, -1), Quaternion.identity); ta = 1; }
         if (timeCutPlusA && tcpa == 0) { levelLength -= 4; levelOffset -= 1; tcpa = 1; }
         if (beamA && ba == 0) { Instantiate(beamReal, play.bulletPos.position, Quaternion.identity); ba = 1; }
@@ -170,6 +164,7 @@ public class Game : MonoBehaviour
             case "bigBullet": bigBulletA = true; break;
             case "shotSpread": shotSpreadA = true; break;
             case "healPlus": healPlusA = true; break;
+            case "shield": shieldA = true; break;
             case "taser": taserA = true; break;
             case "timeCutPlus": timeCutPlusA = true; break;
             case "melee": meleeA = true; break;
@@ -195,7 +190,7 @@ public class Game : MonoBehaviour
                 case 2: case 15: case 16: case 29: card1.GetComponent<Image>().sprite = speedUp; card1.gameObject.name = "speedUp"; if (sua == 0) unique = true; break;
                 case 3: case 17: case 18: case 30: card1.GetComponent<Image>().sprite = heal; card1.gameObject.name = "heal"; unique = true; break;
                 case 4: case 19: case 20: case 31:card1.GetComponent<Image>().sprite = healthDrop; card1.gameObject.name = "healthDrop"; if (hda == 0) unique = true; break;
-                case 43: case 44: case 45: case 46: card1.GetComponent<Image>().sprite = damage; card1.gameObject.name = "damage"; if (da == 0) unique = true; break;
+                case 43: case 44: case 45: case 46: card1.GetComponent<Image>().sprite = damage; card1.gameObject.name = "damage"; unique = true; break;
                 case 5: case 21: case 32: card1.GetComponent<Image>().sprite = bigBullet; card1.gameObject.name = "bigBullet"; if (bba == 0) unique = true; break;
                 case 6: case 22: case 33: card1.GetComponent<Image>().sprite = shotSpread; card1.gameObject.name = "shotSpread"; if (ssa == 0) unique = true; break;
                 case 7: case 23: case 34: card1.GetComponent<Image>().sprite = healPlus; card1.gameObject.name = "healPlus"; if (hpa == 0) unique = true; break;
@@ -222,7 +217,7 @@ public class Game : MonoBehaviour
                 case 2: case 15: case 16: case 29: card2.GetComponent<Image>().sprite = speedUp; card2.gameObject.name = "speedUp"; if (sua == 0) unique = true; break;
                 case 3: case 17: case 18: case 30: card2.GetComponent<Image>().sprite = heal; card2.gameObject.name = "heal"; unique = true; break;
                 case 4: case 19: case 20: case 31:card2.GetComponent<Image>().sprite = healthDrop; card2.gameObject.name = "healthDrop"; if (hda == 0) unique = true; break;
-                case 43: case 44: case 45: case 46: card2.GetComponent<Image>().sprite = damage; card2.gameObject.name = "damage"; if (da == 0) unique = true; break;
+                case 43: case 44: case 45: case 46: card2.GetComponent<Image>().sprite = damage; card2.gameObject.name = "damage"; unique = true; break;
                 case 5: case 21: case 32: card2.GetComponent<Image>().sprite = bigBullet; card2.gameObject.name = "bigBullet"; if (bba == 0) unique = true; break;
                 case 6: case 22: case 33: card2.GetComponent<Image>().sprite = shotSpread; card2.gameObject.name = "shotSpread"; if (ssa == 0) unique = true; break;
                 case 7: case 23: case 34: card2.GetComponent<Image>().sprite = healPlus; card2.gameObject.name = "healPlus"; if (hpa == 0) unique = true; break;
@@ -249,7 +244,7 @@ public class Game : MonoBehaviour
                 case 2: case 15: case 16: case 29: card3.GetComponent<Image>().sprite = speedUp; card3.gameObject.name = "speedUp"; if (sua == 0) unique = true; break;
                 case 3: case 17: case 18: case 30: card3.GetComponent<Image>().sprite = heal; card3.gameObject.name = "heal"; unique = true; break;
                 case 4: case 19: case 20: case 31: card3.GetComponent<Image>().sprite = healthDrop; card3.gameObject.name = "healthDrop"; if (hda == 0) unique = true; break;
-                case 43: case 44: case 45: case 46: card3.GetComponent<Image>().sprite = damage; card3.gameObject.name = "damage"; if (da == 0) unique = true; break;
+                case 43: case 44: case 45: case 46: card3.GetComponent<Image>().sprite = damage; card3.gameObject.name = "damage"; unique = true; break;
                 case 5: case 21: case 32: card3.GetComponent<Image>().sprite = bigBullet; card3.gameObject.name = "bigBullet"; if (bba == 0) unique = true; break;
                 case 6: case 22: case 33: card3.GetComponent<Image>().sprite = shotSpread; card3.gameObject.name = "shotSpread"; if (ssa == 0) unique = true; break;
                 case 7: case 23: case 34: card3.GetComponent<Image>().sprite = healPlus; card3.gameObject.name = "healPlus"; if (hpa == 0) unique = true; break;

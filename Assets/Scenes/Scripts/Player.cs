@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        AudioSource.PlayClipAtPoint(backgroundMusic, Vector3.zero,1);
+        AudioSource.PlayClipAtPoint(backgroundMusic, Vector3.zero,0.1f);
         
         
     }
@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
     void Update()
     {
 
-        fireTimer += 1;
+        
         
         if (Input.GetKey(KeyCode.LeftArrow) && Time.timeScale == 1)
         {
@@ -75,29 +75,6 @@ public class Player : MonoBehaviour
                 fireTimer = 0;
             }
         }
-        
-        if (adjustX > 0) x += 0.052f * speed;
-        if (adjustX > 50) x += 0.025f * speed;
-        if (adjustX > 70) x += 0.015f * speed;
-        if (adjustX > 125) x += 0.015f * speed;
-        if (adjustX < 0) x += -0.052f * speed;
-        if (adjustX < -50) x += -0.025f * speed;
-        if (adjustX < -70) x += -0.015f * speed;
-        if (adjustX < -125) x += -0.015f * speed;
-        
-        if (adjustY > 0) y += 0.052f * speed;
-        if (adjustY > 50) y += 0.025f * speed;
-        if (adjustY > 70) y += 0.015f * speed;
-        if (adjustY > 125) y += 0.015f * speed;
-        if (adjustY < 0) y += -0.052f * speed;
-        if (adjustY < -50) y += -0.025f * speed;
-        if (adjustY < -70) y += -0.015f * speed;
-        if (adjustY < -125) y += -0.015f * speed;
-
-        if (x > 5.12) x = 5.12f;
-        if (x < -5.12) x = -5.12f;
-        if (y > 4.22) y = 4.22f;
-        if (y < -4.22) y = -4.22f;
 
         if (health <= 0)
         {
@@ -153,6 +130,31 @@ public class Player : MonoBehaviour
     private bool shieldUp = false;
     private void FixedUpdate()
     {
+        
+        fireTimer += 1;
+        
+        if (adjustX > 0) x += 0.052f * speed;
+        if (adjustX > 50) x += 0.025f * speed;
+        if (adjustX > 70) x += 0.015f * speed;
+        if (adjustX > 125) x += 0.015f * speed;
+        if (adjustX < 0) x += -0.052f * speed;
+        if (adjustX < -50) x += -0.025f * speed;
+        if (adjustX < -70) x += -0.015f * speed;
+        if (adjustX < -125) x += -0.015f * speed;
+        
+        if (adjustY > 0) y += 0.052f * speed;
+        if (adjustY > 50) y += 0.025f * speed;
+        if (adjustY > 70) y += 0.015f * speed;
+        if (adjustY > 125) y += 0.015f * speed;
+        if (adjustY < 0) y += -0.052f * speed;
+        if (adjustY < -50) y += -0.025f * speed;
+        if (adjustY < -70) y += -0.015f * speed;
+        if (adjustY < -125) y += -0.015f * speed;
+
+        if (x > 5.12) x = 5.12f;
+        if (x < -5.12) x = -5.12f;
+        if (y > 4.22) y = 4.22f;
+        if (y < -4.22) y = -4.22f;
 
         if (shieldA && !shieldUp)
         {

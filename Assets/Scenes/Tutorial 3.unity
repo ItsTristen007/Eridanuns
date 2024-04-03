@@ -1835,10 +1835,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: These bars over here are quite useful, the Red one is your Health and the
-    Purple on is Level Progress
+    Purple one is Level Progress.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 96b2da864442dda4c948182ec710276e, type: 2}
+  m_sharedMaterial: {fileID: 3846398502525592161, guid: 96b2da864442dda4c948182ec710276e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1862,8 +1862,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 19
-  m_fontSizeBase: 19
+  m_fontSize: 18.5
+  m_fontSizeBase: 18.5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

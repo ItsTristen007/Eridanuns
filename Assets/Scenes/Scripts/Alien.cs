@@ -54,17 +54,17 @@ public class Alien : MonoBehaviour
             case "Mini":
                 health = 200 + 50 * level;
                 speed = 3;
-                shootRate = 60 + 1 * level;
+                shootRate = 60 + 2 * level;
                 break;
             case "Midi":
-                health = 300 + 50 * level;
+                health = 300 + 75 * level;
                 speed = 2.5f;
-                shootRate = 70 + 1 * level;
+                shootRate = 70 + 2 * level;
                 break;
             case "Magna":
-                health = 500 + 75 * level;
+                health = 500 + 100 * level;
                 speed = 2;
-                shootRate = 80 + 1 * level;
+                shootRate = 80 + 2 * level;
                 break;
         }
     }
@@ -118,7 +118,7 @@ public class Alien : MonoBehaviour
             if (GameObject.FindGameObjectWithTag("healDropCheck") && Random.Range(0, 3) == 0) Instantiate(healthDrop, bulletPos.position, Quaternion.identity); else if (Random.Range(0, 6) == 0) Instantiate(healthDrop, bulletPos.position, Quaternion.identity);
             GameObject.Find("Plane").GetComponent<Game>().score += name == "Mini" ? (int)Mathf.Round( 100 + 100 * 0.1f * level) : name == "Midi" ? (int)Mathf.Round(200 + 200 * 0.1f * level) : (int)Mathf.Round( 400 + 400 * 0.1f * level);
             AudioSource.PlayClipAtPoint(deadSound, Vector3.zero);
-            if (GameObject.FindGameObjectWithTag("healDropCheck") && pl.health <= pl.maxHealth - 50) pl.health += 50;
+            if (GameObject.FindGameObjectWithTag("vampCheck") && pl.health <= pl.maxHealth - 50) pl.health += 50;
             Instantiate(explosion, bulletPos.position, Quaternion.identity);
             Destroy(gameObject);
         }
@@ -158,7 +158,7 @@ public class Alien : MonoBehaviour
                 taserTimer = taserStart;
             }
 
-            health -= 100 + 50 * damageCheck;
+            health -= 200 + 50 * damageCheck;
         }
 
         if (other.gameObject.CompareTag("melee"))
@@ -169,7 +169,7 @@ public class Alien : MonoBehaviour
                 taserStart = Time.time;
                 taserTimer = taserStart;
             }
-            health -= 100 + 50 * damageCheck;
+            health -= 400 + 50 * damageCheck;
         }
     }
 

@@ -48,13 +48,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c183a6fa05688454c88287d1ef2c5e71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserSound: {fileID: 8300000, guid: 4310474905e266640852f43bd609a1a4, type: 3}
+  laserSound: {fileID: 8300000, guid: 8765714b5c19e5242be8d0cf455e710c, type: 3}
   backgroundMusic: {fileID: 8300000, guid: 06906d718be5b6a4cb2df8732bf39832, type: 3}
   healthBar: {fileID: 0}
-  fireRate: 85
+  fireRate: 20
   maxHealth: 400
   health: 400
-  speed: 0.22
+  speed: 1.4
   shotSpreadA: 0
   bigBulletA: 0
   shieldA: 0
