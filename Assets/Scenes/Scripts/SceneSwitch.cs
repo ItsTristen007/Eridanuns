@@ -36,4 +36,9 @@ public class SceneSwitch : MonoBehaviour
     {
         AudioSource.PlayClipAtPoint(buttonSound, Vector3.zero,1f);
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }

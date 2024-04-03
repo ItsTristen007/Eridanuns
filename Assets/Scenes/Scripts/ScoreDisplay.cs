@@ -21,7 +21,8 @@ public class ScoreDisplay : MonoBehaviour
         b2.onClick.AddListener(HighScore);
         b3.onClick.AddListener(Back);
        
-        if ( score > PlayerPrefs.GetInt("HighScore"))
+        
+        if ( score > PlayerPrefs.GetInt("Highscore"))
         {
             PlayerPrefs.SetInt("Highscore", score);
         }

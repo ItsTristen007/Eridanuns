@@ -65,7 +65,9 @@ public class Game : MonoBehaviour
     
     void Back()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("Title");
+
         
     }
 
