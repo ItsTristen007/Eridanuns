@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class Game : MonoBehaviour
@@ -20,6 +21,8 @@ public class Game : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI levelText;
     public GameObject player;
+    public Button Exit;
+
 
     private int check = 0;
 
@@ -37,6 +40,10 @@ public class Game : MonoBehaviour
     void Start()
     {
         GameObject obj = Instantiate(player, new Vector3(0, -2.75f, -1), Quaternion.identity);
+        Exit.enabled = false;
+        
+       
+        Exit.onClick.AddListener(Back);
     }
 
     // Update is called once per frame
@@ -46,9 +53,26 @@ public class Game : MonoBehaviour
         levelText.text = $"Level: {level+1:00}";
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (Time.timeScale == 0) Time.timeScale = 1;
-            else Time.timeScale = 0;
+            if (Time.timeScale == 0) { Time.timeScale = 1; Exit.gameObject.SetActive(false); }
+            else
+            {
+                Time.timeScale = 0; Exit.enabled = true;
+                Exit.gameObject.SetActive(true);
+
+            }
+                
+                    
+                    
         }
+    }
+
+   
+
+    void Back()
+    {
+        SceneManager.LoadScene("Title");
+       
+
     }
 
     void FixedUpdate()

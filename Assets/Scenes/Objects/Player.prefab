@@ -51,10 +51,10 @@ MonoBehaviour:
   laserSound: {fileID: 8300000, guid: 4310474905e266640852f43bd609a1a4, type: 3}
   backgroundMusic: {fileID: 8300000, guid: 06906d718be5b6a4cb2df8732bf39832, type: 3}
   healthBar: {fileID: 0}
-  fireRate: 25
+  fireRate: 85
   maxHealth: 400
   health: 400
-  speed: 2
+  speed: 0.22
   shotSpreadA: 0
   bigBulletA: 0
   shieldA: 0
